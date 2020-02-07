@@ -2,23 +2,28 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { Provider } from 'react-redux';
+import store from './Reducers/store';
+import AddTodoContainer from './Containers/AddTodoContainer';
+
+import TodoListContainer from './Containers/TodoListContainer';
+import Footer from './Components/Footer';
+import { saveState } from './localStorage';
+import throttle from 'lodash/throttle';
 function App() {
+  store.subscribe(
+    throttle(() => {
+      saveState({ todos: store.getState().todos });
+    }, 1000),
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <AddTodoContainer />
+        <TodoListContainer />
+        <Footer />
+      </Provider>
     </div>
   );
 }
