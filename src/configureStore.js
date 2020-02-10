@@ -1,7 +1,5 @@
 import { createStore } from 'redux';
-
 import { loadState, saveState } from './localStorage';
-
 import throttle from 'lodash/throttle';
 import rootReducer from './Reducers/index';
 const configureStore = () => {
