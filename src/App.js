@@ -7,11 +7,11 @@ import AddTodoContainer from './Containers/AddTodoContainer';
 import TodoListContainer from './Containers/TodoListContainer';
 import Footer from './Components/Footer';
 
-function App() {
+function App({ match }) {
   return (
     <div className="App">
       <AddTodoContainer />
-      <TodoListContainer />
+      <TodoListContainer filter={match.params.filter || 'all'} />
       <Footer />
     </div>
   );
