@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { connect } from 'react-redux';
 
 import TodoList from '../Components/TodoList';
@@ -21,7 +19,7 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = state => ({
   todos: getVisibleTodos(state.todos, state.filter),
-}); //todos:todos - jak te same nazwy key value tomozna pominac value
+});
 
 const mapDispatchToProps = dispatch => {
   return { onToogleTodo: id => dispatch(toggleTodo(id)) };

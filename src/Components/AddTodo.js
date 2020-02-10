@@ -1,11 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { connect } from 'react-redux';
-import store from '../Reducers/store';
-import addTodoAction from '../ActionCreators/addTodoAction';
 
-//todos znowu destruturyzuje sie bo mapStateToProps zwraca obiekt,
-//w koteym jest docelow array z todo
 const AddTodo = ({ onTodoClick }) => {
   const [inpvalue, setInpvalue] = useState('');
 
