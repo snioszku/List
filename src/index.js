@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Root from './Components/Root';
-import configureStore from './configureStore';
+import store from './Reducers/store';
 
-const store = configureStore();
 ReactDOM.render(<Root store={store} />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
