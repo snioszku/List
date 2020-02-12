@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import addTodoReducer, * as fromAddTodoReducer from './addTodoReducer';
+import todos, * as fromAddTodoReducer from './addTodoReducer';
 
 const rootReducer = combineReducers({
-  todos: addTodoReducer,
+  todos,
 });
 export default rootReducer;
 export const getVisibleTodos = (state, filter) => {

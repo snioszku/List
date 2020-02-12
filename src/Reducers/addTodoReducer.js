@@ -41,13 +41,11 @@ const allIds = (state = [], action) => {
   }
 };
 
-const addTodoReducer = combineReducers({ byId, allIds });
+const todos = combineReducers({ byId, allIds });
 
-export default addTodoReducer;
+export default todos;
 
-const getAllTodos = state => {
-  state.allIds.map(id => state.byId[id]);
-};
+const getAllTodos = state => state.allIds.map(id => state.byId[id]);
 
 export const getVisibleTodos = (state, filter) => {
   const allTodos = getAllTodos(state);
