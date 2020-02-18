@@ -1,26 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
-import { loadState, saveState } from './localStorage';
-import throttle from 'lodash/throttle';
 import rootReducer from './Reducers/index';
-
-const logger = store => next => action => {
-  console.log('action:', action);
-  next(action);
-  console.log('state after', store.getState());
-};
+import { createLogger } from 'redux-logger';
+import promise from 'redux-promise';
 
 const configureStore = () => {
-  const presistedState = loadState();
-  const store = createStore(
-    rootReducer,
-    presistedState,
-    applyMiddleware(logger),
-  );
-  store.subscribe(
-    throttle(() => {
-      saveState({ todos: store.getState().todos });
-    }, 1000),
-  );
-  return store;
+  const middlewares = [promise];
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(createLogger());
+  }
+  return createStore(rootReducer, applyMiddleware(...middlewares));
 };
 export default configureStore;

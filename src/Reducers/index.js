@@ -1,10 +1,38 @@
 import { combineReducers } from 'redux';
-import todos, * as fromAddTodoReducer from './addTodoReducer';
+import byId, * as fromById from './byId';
+import createList, * as fromCreateList from './createList';
 
-const rootReducer = combineReducers({
-  todos,
+// const todo = (state, action) => {
+//   switch (action.type) {
+//     case 'ADD_TODO':
+//       return {
+//         id: action.id,
+//         text: action.text,
+//         completed: false,
+//       };
+//     case 'TOGGLE_TODO':
+//       if (state.id !== action.id) {
+//         return state;
+//       }
+//       return {
+//         ...state,
+//         completed: !state.completed,
+//       };
+//     default:
+//       return state;
+//   }
+//};
+
+const idsByFilter = combineReducers({
+  all: createList('all'),
+  active: createList('active'),
+  completed: createList('completed'),
 });
-export default rootReducer;
+const todos = combineReducers({ byId, idsByFilter });
+
+export default todos;
+
 export const getVisibleTodos = (state, filter) => {
-  return fromAddTodoReducer.getVisibleTodos(state.todos, filter);
+  const ids = fromCreateList.getIds(state.idsByFilter[filter]);
+  return ids.map(id => fromById.getTodo(state.byId, id));
 };
