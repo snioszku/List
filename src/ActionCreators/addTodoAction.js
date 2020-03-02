@@ -1,7 +1,7 @@
-import { v4 } from 'node-uuid';
-
-const addTodoAction = text => {
-  return { type: 'ADD_TODO', text, id: v4(), completed: false };
-};
+import * as api from '../fake_api/index';
+const addTodoAction = text => dispatch =>
+  api.addTodo(text).then(response => {
+    dispatch({ type: 'ADD_TODO_SUCCES', response });
+  });
 
 export default addTodoAction;
