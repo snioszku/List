@@ -1,4 +1,6 @@
 import * as api from '../fake_api';
+import { normalize } from 'normalizr';
+import * as Schema from './Schema';
 
 import { getIsFetching } from '../Reducers/createList';
 
@@ -15,7 +17,7 @@ export const fetchTodos = filter => (dispatch, getState) => {
       dispatch({
         type: 'FETCH_TODOS_SUCCESS',
         filter,
-        response,
+        response: normalize(response, Schema.arrayOfTodos),
       });
     },
     error => {
